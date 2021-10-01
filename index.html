@@ -60,7 +60,8 @@
         <ul>
           <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
           <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
-          <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
+          <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Background</span></a></li>
+          <li><a href="#projects" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Research/Projects</span></a></li>
           <!-- <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
           <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li> -->
           <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
@@ -73,7 +74,7 @@
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
     <div class="hero-container" data-aos="fade-in">
       <h1>Raja Kumar</h1>
-      <p>I'm Software Engineer</p>
+      <p>I'm <span class="typed" data-typed-items="ML Engineer, Researcher, Traveller"></span></p>
     </div>
   </section><!-- End Hero -->
 
@@ -245,13 +246,13 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Resume</h2>
+          <h2>Background</h2>
           <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
         </div>
 
         <div class="row">
           <div class="col-lg-6" data-aos="fade-up">
-            <h3 class="resume-title">Sumary</h3>
+            <h3 class="resume-title">Summary</h3>
             <div class="resume-item pb-0">
               <h4>Raja Kumar</h4>
               <p><em>Machine Learning Engineer with 2 years of industry experience working on deployment of DNN models on resource constrained devices. Have experience of working with various camera use-cases and its deployment on samsung smartphones. Hands on experience with deep learning frameworks like Pytorch, tf, caffe etc. Passionate learner and problem solver</em></p>
@@ -301,6 +302,78 @@
 
       <div> <p>&nbsp; &nbsp; &nbsp; &nbsp; My Complete resume can be found <a href="#"> here </a></p></div>
     </section><!-- End Resume Section -->
+
+    <!-- ======= Research and Projects Section ======= -->
+    <section id="projects" class="resume">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Papers/Patents</h2>
+          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+        </div>
+
+        <div class="row">
+          <div data-aos="fade-up">
+            <div class="resume-item pb-0">
+              <h3 class="resume-title">Hybrid and Non-Uniform quantization methods using retro synthesis data for efficient inference</h3>
+              <h4><em>International Joint Conference on Neural Networks (IJCNN) 2021</em></h4>
+              <h5><a href="https://arxiv.org/pdf/2012.13716.pdf"> Paper </a> <a href="https://github.com/raja-kumar/Hybrid_and_Non-uniform_quantization"> / Code </a></h5>
+              <p>We proposed a data-independent post-training quantization scheme that eliminates the need for training data. This is achieved by generating a faux dataset, hereafter referred to as ‘Retro-Synthesis Data’, from the FP32 model layer statistics and further using it for quantization. This approach outperformed state-of-the-art methods including, but not limited to, ZeroQ and DFQ on models with and without Batch-Normalization layers for 8, 6, and 4 bit precisions on ImageNet and CIFAR-10 datasets. We also introduced two futuristic variants of post-training quantization methods namely ‘Hybrid Quantization’ and ‘Non-Uniform Quantization’. The Hybrid Quantization scheme determines the sensitivity of each layer for per-tensor & per-channel quantization, and thereby generates hybrid quantized models that are ‘10 to 20%’ efficient in inference time while achieving the same or better accuracy compared to per-channel quantization. In the proposed Non-Uniform Quan- tization scheme, the weights are grouped into different clusters and these clusters are assigned with a varied number of quantization steps depending on the number of weights and their ranges in the respective cluster </p>
+            </div>
+
+            <div class="resume-item pb-0">
+              <h3 class="resume-title">Automatic Classification and Localisation of Defects in Hot-Rolled Steel Surfaces</h3>
+              <h4><em>Bachelor's Thesis Project (BTP) under Prof. P.K.Dutta (IIT Kharagpur)</em></h4>
+              <!--- <h5><a href="https://arxiv.org/pdf/2012.13716.pdf"> Paper </a> <a href="https://github.com/raja-kumar/Hybrid_and_Non-uniform_quantization"> / Code </a></h5> --->
+              worked on developing DNN solution for classification of defective steel surfaces into various defect types and localization of the defective patch in original image. Used transfer learning with inceptionV3 as backbone achitecture and achived an accuracy of 93.88%.
+              <p></p>
+            </div>
+
+          </div>
+        </div>
+          <!-- <div class="col-lg-6" data-aos="fade-up">
+            <h3 class="resume-title">Summary</h3>
+            <div class="resume-item pb-0">
+              <h4>Raja Kumar</h4>
+              <p><em>Machine Learning Engineer with 2 years of industry experience working on deployment of DNN models on resource constrained devices. Have experience of working with various camera use-cases and its deployment on samsung smartphones. Hands on experience with deep learning frameworks like Pytorch, tf, caffe etc. Passionate learner and problem solver</em></p>
+              <ul>
+                <li>Bangalore, Karnatka, India, 560014</li>
+                <li>rajasanwir.iitkgp@gmail.com</li>
+              </ul>
+            </div>
+
+            <h3 class="resume-title">Education</h3>
+            <div class="resume-item">
+              <h4>B.Tech, Electrical Engineering</h4>
+              <h5>2015 - 2019</h5>
+              <p><em>Indian Institute of Technology(IIT), Kharagpur, India</em></p>
+              <p>Graduated with a Major in Electrical Engineering. During my bachelor's project, Worked with Prof P.K.Dutta (prof IIT kharagpur, Department of Electrical Engineering) on Flat steel defect detection and segmentation using DNN. Was actively involved in extra-curricular hall activities like basketball, dramatics, case-studies etc.</p>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="resume-title">Professional Experience</h3>
+            <div class="resume-item">
+              <h4>Senior Machine Learning Engineer</h4>
+              <h5>June 2019 - Present</h5>
+              <p><em> Samsung Research Institute Bangalore, India </em></p>
+              <ul>
+                <li> Worked extensively on DNN compression technique for faster inference and proposed a novel Quantization method for DNN model compression. Achieved state-of-the-art accuracy for open-source classifier models on imagenet and cifar10 datasets</li>
+                <li>Worked on enabling the execution of Deep Neural Network(DNN) use-cases on Samsung flagship devices via SNAP interface utilizing the underlying hardwares especially DSP and NPU to optimally improve the performance and accuracy.</li>
+              </ul>
+            </div>
+            <div class="resume-item">
+              <h4>Software Engineer Intern</h4>
+              <h5>May 2018 - July 2018</h5>
+              <p><em>Scheider Electric R&D Bangalore, India</em></p>
+              <ul>
+                <li>worked on the project 'Adoption of Scheider Digitization Tools' as a part of the DCES (Digital Customer Experience Software) team. predicted potential new users from the given dataset of user information using the Data Mining concept Association Rule Mining</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> --> <!-- End Research and Projects Section -->
+
 
     <!-- ======= Portfolio Section ======= 
     <section id="portfolio" class="portfolio section-bg">
