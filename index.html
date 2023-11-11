@@ -32,7 +32,7 @@
                 I am currently pursuing my Masters in Computer Science at the University of California Santa Cruz. I am currently a part of <a href = "https://sites.google.com/ucsc.edu/vis/home?authuser=0">VIS group</a> at UCSC guided by professor <a href = "https://users.soe.ucsc.edu/~davis/">James Davis</a>
               </p>
               <p>
-                At Samsung Research, I worked with the on-device-AI team on developing and deploying Deep Learning Models on Samsung devices. I also worked on model compression techniques, DNN quantization in particular. Currently, I am doing research on 3D face reconstruction.
+                Previously, at Samsung Research, I worked with the on-device-AI team on developing and deploying Deep Learning Models on Samsung devices. I also worked on model compression techniques, DNN quantization in particular. Currently, I am doing research on 3D face reconstruction.
               </p>
                 I obtained my Bachelor's degree in Electrical Engineering from IIT Kharagpur. 
               <p>
@@ -55,7 +55,7 @@
                 <a href="https://www.linkedin.com/in/raja-kumar-58971010a/"> LinkedIn </a> &nbsp;/&nbsp;
                 <!---<a href="https://www.instagram.com/raja_sanwir/"> instagram </a> &nbsp;/&nbsp;--->
                 <a href="https://twitter.com/RajaSanwir"> Twitter </a> &nbsp;/&nbsp;
-                <a href="https://drive.google.com/file/d/1VREyG2HoBQYsbYpWWNje6Kjr3mxVkyGJ/view?usp=sharing"> CV </a>
+                <a href="https://drive.google.com/file/d/1zprtsoMC-mPo1PCiYW_54xcq7Y6CAd5S/view?usp=sharing"> CV </a>
               </p>
             </td>
             <td style="padding:2.5%;width:40%;max-width:40%">
@@ -101,11 +101,11 @@
                 </a>
                 <br>
                 <strong>Raja Kumar</strong>,
-                <a href="">Jiahao Luo</a>,
-                <a href="">Alex Pang</a>,
-                <a href="">James Davis</a>,
+                <a href="https://scholar.google.com/citations?user=2x71Xmh1U3gC&hl=en">Jiahao Luo</a>,
+                <a href="https://users.soe.ucsc.edu/~pang/">Alex Pang</a>,
+                <a href="https://users.soe.ucsc.edu/~davis/">James Davis</a>
                 <br>
-                <em>IEEE/CVF International Conference on Computer Vision (ICCV) Workshops, </em>, 2023
+                <em>IEEE/CVF International Conference on Computer Vision (ICCV) Workshops</em>, 2023
                 <br>
                 </p>
                 <p>
@@ -120,8 +120,45 @@
         </tr>
       </td>
     </tr>
+
+    <tr bgcolor="#ffffd0">
+            <td style="padding:20px;width:35%;vertical-align:middle">
+                <img src='images/stereo_flame.png' width="250"></div>
+                    </td>
+            <td width="75%" valign="middle">
+                <p>
+                <a href="https://arxiv.org/abs/2308.13903">
+                    <papertitle>Paper: 3D Face Reconstruction: Is model-based classic passive stereo competitive?</papertitle>
+                </a>
+                <br>
+                <a href="https://scholar.google.com/citations?user=2x71Xmh1U3gC&hl=en">Jiahao Luo</a>,
+                <strong>Raja Kumar</strong>,
+                <a href="https://users.soe.ucsc.edu/~pang/">Alex Pang</a>,
+                <a href="https://users.soe.ucsc.edu/~davis/">James Davis</a>
+                <br>
+                <em>Under Review</em>
+                <br>
+                </p>
+                <p>
+                  The highest quality 3D face reconstructions are produced using multi-view stereo methods, reporting errors below 0.5mm.
+Unfortunately, these methods typically employ dozens of high-resolution cameras in a large laboratory capture gantry. In contrast,
+state-of-the-art 3D face reconstructions using sophisticated deep learning models and few views are suited for casual mobile phone
+imaging outside the lab and report a mean error of 1-2mm. This paper investigates whether classic passive stereo methods can be used in scenarios with only a few low-resolution images
+available. We expect to find that it cannot since multi-view stereo performs well only when many high-resolution images are provided.
+When only two low-resolution images are available, stereo produces very noisy results which are not directly usable. However, our
+analysis shows that this visually noisy data has lower error than comparison state-of-the-art methods. We find that the visual artifacts
+from stereo can be removed using a morphable face model to constrain face shape
+                </p>
+                <div class="paper" id="iccvw_2023">
+                    <a href="https://drive.google.com/file/d/1ys0M4PCsLzBcKT83dCV6kSsmua8nDaQz/view?usp=sharing">Pdf</a>
+                </div>
+                <br>
+            </td>
+        </tr>
+      </td>
+    </tr>
           
-          <tr bgcolor="#ffffd0">
+          <tr>
         <td style="padding:20px;width:35%;vertical-align:middle">
             <img src='images/dense_2d.png' width="250"></div>
                 </td>
@@ -143,7 +180,7 @@
         </td>
     </tr>
 
-  <tr>
+  <tr bgcolor="#ffffd0">
         <td style="padding:20px;width:35%;vertical-align:middle">
             <img src='images/pipeline.png' width="250"></div>
                 </td>
@@ -178,7 +215,7 @@ selection task.
         </td>
     </tr>
 
-        <tr bgcolor="#ffffd0">
+        <tr>
             <td style="padding:20px;width:35%;vertical-align:middle">
                 <img src='images/ijcnn_image.png' width="250"></div>
                     </td>
@@ -209,7 +246,7 @@ selection task.
       </td>
     </tr>
 
-    <tr>
+    <tr bgcolor="#ffffd0">
         <td style="padding:20px;width:35%;vertical-align:middle">
             <img src='images/btp.png' width="250"></div>
                 </td>
@@ -221,12 +258,15 @@ selection task.
             <br>
             </p>
             <p>
-                This is my Bachelor's thesis aimed to develop DNN solution for classification of defective steel surfaces into various defect types and localization of the defective patch in original image.
+               This is my Bachelor's thesis aimed at developing an efficient DL solution for real-time detection and segmentation of defects in hot-rolled steel Surfaces. We train an R-CNN model in the frequency domain
+using DCT to improve the accuracy achieving a mAP@0.5 score of 82.4.
             </p>
-            <div class="paper" id="btp">
+            <!---
+          <div class="paper" id="btp">
                 <a href="https://docs.google.com/presentation/d/1i4injnLzix94WWDP8WRy1UJ23-JG9-p7/edit?usp=share_link&ouid=113131068153245641189&rtpof=true&sd=true">pdf</a> 
                 
             </div>
+          --->
             <br>
         </td>
     </tr>
@@ -241,7 +281,7 @@ selection task.
  <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
                 <td style="padding:10px;width:100%;vertical-align:middle">
-                    <heading>Teaching</heading>
+                    <heading>Teaching Assistant</heading>
                 </td>
             </tr>
         </tbody></table>
@@ -277,6 +317,7 @@ selection task.
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
         <tr>
             <ul>
+                <li><strong>[Oct 2023]</strong> Attended ICCV 2023 in Paris</li>
                 <li><strong>[Aug 2023]</strong> Our Paper on 3D face reconstruction got accepted at ICCV workshops 2023</li>
                 <li><strong>[Sep 2022]</strong> I Joined UCSC as CSE Master's student starting in Fall 2022</li>
                 <li><strong>[March 2022]</strong> I joined Silverlabs recommendation team as an ML Engineer</li>
@@ -285,25 +326,6 @@ selection task.
             </ul>
         </tr>
         </tbody></table>
-
-<!--- this is the events section  -->
- <!---       <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-                <td style="padding:10px;width:100%;vertical-align:middle">
-                    <heading>Events</heading>
-                </td>
-            </tr>
-        </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-        <tr>
-            <ul>
-              <li><strong>[Workshop@CVPR2020]</strong> I co-organized the Workshop on <a href="https://adv-workshop-2020.github.io/">Adversarial Machine Learning in Computer Vision</a> in CVPR 2020. The video recording is <a href="https://www.youtube.com/watch?v=FCTf5MeIBFM&list=PLT6XqV0BKKrKN7GwULt9Z6hVxYd3PSaoy">here</a>.</li>
-            </ul>
-          </td>
-        </tr>
-        </tbody></table>
-    -->
 
 
   <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
