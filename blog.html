@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blog</title>
+  <meta name="description" content="Blog posts by Raja Kumar" />
+
+  <style>
+    :root{
+      --bg:#0b0d10; --panel:#0f1217; --text:#e9eef5; --muted:#aab6c5;
+      --line:#1f2631; --link:#7dd3fc;
+      --radius:18px; --max:900px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f7f8fb; --panel:#ffffff; --text:#111827; --muted:#6b7280;
+        --line:#e5e7eb; --link:#0369a1;
+      }
+    }
+
+    body{
+      margin:0;
+      font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:var(--bg);
+      color:var(--text);
+    }
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    header{
+      position:sticky; top:0;
+      border-bottom:1px solid var(--line);
+      background:var(--bg);
+    }
+    .bar{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    main{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:18px;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      margin-bottom:14px;
+    }
+
+    .post-link h2{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+    .meta{
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .desc{
+      margin:0;
+      color:var(--muted);
+    }
+
+    footer{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 18px 26px;
+      color:var(--muted);
+      font-size:13px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="bar">
+      <strong>Blog</strong>
+      <a href="index.html">← Back to Home</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h1 style="margin:0 0 6px">Blog</h1>
+      <p class="desc">Notes on research, ideas and things I’m learning.</p>
+    </section>
+
+    <!-- BLOG POST LINKS (add new posts at the top) -->
+
+    <article class="card post-link">
+      <h2>
+        <a href="posts/Berkley_AI_summit.html">
+          Notes from Agentic AI Summit 2025 at UC Berkeley
+        </a>
+      </h2>
+      <div class="meta">2024 · Talk notes</div>
+      <p class="desc">
+        Key takeaways from the Agentic AI Summit 2024 held at UC Berkeley,
+        discussing the current state and future of AI agents.
+      </p>
+    </article>
+
+    <!-- Copy this block for each new post -->
+    <!--
+    <article class="card post-link">
+      <h2>
+        <a href="posts/your-post-name.html">Post title</a>
+      </h2>
+      <div class="meta">YYYY · category</div>
+      <p class="desc">
+        1–2 sentence description of what the post is about.
+      </p>
+    </article>
+    -->
+
+  </main>
+
+  <footer>
+    © <span id="y"></span> Raja Kumar
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

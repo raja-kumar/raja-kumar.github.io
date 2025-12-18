@@ -1,382 +1,454 @@
-<!DOCTYPE HTML>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-7580334-2');
-  </script>
-
+<!-- Save as: index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Raja Kumar</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  
-  <meta name="author" content="Raja Kumat">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="icon" type="image/png" href="images/UCSC_icon.png">
+  <meta name="description" content="Raja Kumar — Computer Vision & Deep Learning" />
+  <style>
+    :root{
+      --bg:#f7f8fb; --panel:#ffffff; --text:#111827; --muted:#6b7280;
+      --line:#e5e7eb; --link:#0369a1; --chip:#f3f4f6;
+      --shadow:0 10px 25px rgba(17,24,39,.08);
+      --radius: 18px; --max: 1120px;
+    }
+    :root[data-theme="dark"]{
+      --bg:#0b0d10; --panel:#0f1217; --text:#e9eef5; --muted:#aab6c5;
+      --line:#1f2631; --link:#7dd3fc; --chip:#141a22;
+      --shadow: 0 8px 28px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font:16px/1.55 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text)}
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* News: single list that scrolls only after > 10 items */
+.news-list{
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in oklab, var(--panel) 80%, var(--chip));
+  padding: 10px 12px;
+}
+
+/* Applied only when JS detects > 10 items */
+.news-list.is-scroll{
+  overflow: auto;
+}
+
+
+    .topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:color-mix(in oklab, var(--bg) 78%, transparent);border-bottom:1px solid var(--line)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:14px}
+    .top-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--link);box-shadow:0 0 0 6px color-mix(in oklab, var(--link) 20%, transparent)}
+    nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+    nav a{padding:8px 10px;border-radius:999px;background:transparent;border:1px solid transparent;color:var(--text);opacity:.9}
+    nav a:hover{text-decoration:none;border-color:var(--line);background:color-mix(in oklab, var(--chip) 70%, transparent)}
+    .theme-toggle{padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:color-mix(in oklab, var(--chip) 70%, transparent);color:var(--text);cursor:pointer;font-size:14px;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+    .theme-toggle svg{width:18px;height:18px;display:block}
+    .theme-toggle:hover{background:color-mix(in oklab, var(--chip) 50%, transparent)}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px 56px;display:grid;grid-template-columns:320px 1fr;gap:18px}
+    @media (max-width:920px){.wrap{grid-template-columns:1fr}}
+
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .sidebar{position:sticky;top:78px;align-self:start;padding:18px}
+    @media (max-width:920px){.sidebar{position:relative;top:auto}}
+
+    .profile{display:flex;gap:14px;align-items:center}
+    .avatar{width:78px;height:78px;border-radius:18px;border:1px solid var(--line);object-fit:cover;background:var(--chip)}
+    .name{font-size:20px;font-weight:800;margin:0}
+    .role{margin:2px 0 0;color:var(--muted);font-size:14px}
+
+    .quicklinks{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:color-mix(in oklab, var(--chip) 85%, transparent);color:var(--text);font-size:14px;opacity:.95}
+    .chip:hover{text-decoration:none;opacity:1}
+
+    .section{padding:18px;margin-bottom:18px}
+    .section h2{margin:0 0 10px;font-size:18px;letter-spacing:.2px}
+    .muted{color:var(--muted)}
+    .list{margin:10px 0 0;padding-left:18px}
+    .list li{margin:6px 0}
+
+    /* NEW: scrollable news list */
+    .news-box{
+      margin-top:10px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background: color-mix(in oklab, var(--panel) 80%, var(--chip));
+      padding:10px 12px;
+    }
+    .news-scroll{
+      max-height: 240px;           /* adjust height as you like */
+      overflow:auto;
+      padding-right: 8px;          /* room for scrollbar */
+    }
+    .divider{
+      height:1px;
+      background:var(--line);
+      margin:10px 0;
+    }
+    .subhead{
+      margin:0 0 8px;
+      font-size:13px;
+      color:var(--muted);
+      letter-spacing:.2px;
+      text-transform:uppercase;
+    }
+
+    .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:10px}
+    .pub{display:grid;grid-template-columns:160px 1fr;gap:12px;padding:12px;border:1px solid var(--line);border-radius:16px;background:color-mix(in oklab, var(--panel) 80%, var(--chip))}
+    @media (max-width:620px){.pub{grid-template-columns:1fr}}
+    .thumb{width:100%;height:110px;border-radius:14px;border:1px solid var(--line);object-fit:cover;background:var(--chip)}
+    .pub h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+    .meta{margin:0;color:var(--muted);font-size:14px}
+    .actions{margin-top:8px;display:flex;flex-wrap:wrap;gap:10px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--text);font-size:14px}
+    .btn:hover{text-decoration:none;background:color-mix(in oklab, var(--chip) 70%, transparent)}
+
+    footer{max-width:var(--max);margin:0 auto;padding:0 18px 26px;color:var(--muted);font-size:13px}
+    .kicker{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:color-mix(in oklab, var(--chip) 85%, transparent);color:var(--muted);font-size:13px}
+    .conf {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    background: color-mix(in oklab, var(--link) 18%, transparent);
+    color: var(--link);
+    border: 1px solid color-mix(in oklab, var(--link) 35%, transparent);
+    vertical-align: middle;
+  }
+  .conf-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:4px 10px;
+    border-radius:999px;
+    background:color-mix(in oklab, var(--link) 16%, transparent);
+    color:var(--link);
+    border:1px solid color-mix(in oklab, var(--link) 30%, transparent);
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.15px;
+    line-height:1.2;
+  }
+  .meta .conf-tag{margin-left:6px}
+  .me{font-weight:800;color:var(--link)}
+
+  </style>
 </head>
 
-<!-- <body onload="startPetCursor();"> -->
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:70%;vertical-align:middle">
-              <p style="text-align:center">
-                <name>Raja Kumar</name>
-              </p>
-              <p>
-                I am a PhD student at University of Southern California advised by Prof. <a href = "https://viterbi.usc.edu/directory/faculty/Nevatia/Ramakant">Ram Nevatia</a>. I am broadly interested in Computer Vision and Deep Learning, with a focus on developing models for visual understanding in images and videos.
-              </p>
-              <p>  
-                Before Joining USC, I completed my MS in Computer Science at the University of California Santa Cruz advised by Prof. <a href = "https://users.soe.ucsc.edu/~davis/">James Davis</a>. Previously, at Samsung Research, I worked with the on-device-AI team on developing and deploying Deep Learning Models on Samsung devices. I obtained my Bachelor's degree in Electrical Engineering from IIT Kharagpur.
-              </p> 
-              
-              <p style="text-align:center">
-                <a href = "mailto: rajasanwir.iitkgp@gmail.com">Email</a> &nbsp;/&nbsp;
-                <a href="https://github.com/raja-kumar">GitHub</a> &nbsp;/&nbsp;
-                <a href="https://scholar.google.com/citations?user=wlU2x_kAAAAJ&hl=en">Google Scholar</a> &nbsp;/&nbsp;
-                <a href="https://www.linkedin.com/in/raja-kumar-58971010a/"> LinkedIn </a> &nbsp;/&nbsp;
-                <!---<a href="https://www.instagram.com/raja_sanwir/"> instagram </a> &nbsp;/&nbsp;--->
-                <!---<a href="https://twitter.com/RajaSanwir"> Twitter </a> &nbsp;/&nbsp;--->
-                <a href="https://drive.google.com/file/d/1y4ZPvDkjdZNHk0c3kqe_9oFDEC1lPjy5/view?usp=sharing"> Resume (1 Page) </a>
-              </p>
-            </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <a href="images/raja_paris.jpg"><img style="width:70%;max-width:70%;border-radius:30%" alt="profile photo" src="images/raja_paris.jpg" class="hoverZoomLink"></a>
-            </td>
-          </tr>
-        </tbody></table>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Raja Kumar</span>
+      </div>
 
-        <hr>
+      <div class="top-actions">
+        <!-- Top nav: no search, no Publication List; NEW: Blog link opens new page -->
+        <nav aria-label="Primary">
+          <a href="#about">Home</a>
+          <a href="#news">News</a>
+          <a href="#projects">Projects & Papers</a>
+          <a href="#teaching">Teaching</a>
+          <a href="blog.html" target="_blank" rel="noreferrer">Blog</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 14.5A9 9 0 0 1 11.5 3 8 8 0 1 0 21 14.5Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
+  <main class="wrap">
+    <!-- Sidebar -->
+    <aside class="card sidebar" aria-label="Profile">
+      <div class="profile">
+        <img class="avatar" src="https://raja-kumar.github.io/images/raja_paris.jpg" alt="Profile photo" />
+        <div>
+          <p class="name">Raja Kumar</p>
+          <p class="role">CS PhD Student · University of Southern California</p>
+        </div>
+      </div>
 
-<!--- This is the news/update section --->
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-                <td style="padding:10px;width:100%;vertical-align:middle">
-                    <heading>News/Updates</heading>
-                </td>
-            </tr>
-        </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-        <tr>
-            <ul>
-                <li><strong>[Aug 2024]</strong> Joined USC as a CS PhD Student! </li>
-                <li><strong>[Aug 2024]</strong> My work on few-shot 3D Gaussian splatting got accepted at S3DSGR @ ECCV'24!</li>
-                <li><strong>[Apr 2024]</strong> Joined Flawless AI as Applied Science Intern 3D vision</li>
-                <li><strong>[Mar 2024]</strong> Completed my MS in CS at UC Santa Cruz</li>
-                <li><strong>[Oct 2023]</strong> Attended ICCV 2023 in Paris</li>
-                <li><strong>[Aug 2023]</strong> My Paper on 3D face reconstruction got accepted at ICCV workshops 2023</li>
-                <li><strong>[Sep 2022]</strong> Joined UCSC as CSE Master's student starting in Fall 2022</li>
-                <li><strong>[Mar 2022]</strong> Joined Silverlabs recommendation team as an ML Engineer</li>
-                <li><strong>[Apr 2021]</strong> My paper on quantization got accepted by IJCNN 2021</li>
-                <li><strong>[Jun 2019]</strong> Joined Samsung Research on-device-AI team as an ML Engineer</li>
-            </ul>
-        </tr>
-        </tbody></table>
-      <hr>
+      <div class="quicklinks" aria-label="Links">
+        <a class="chip" href="mailto:rajasanwir.iitkgp@gmail.com">Email</a>
+        <a class="chip" href="https://github.com/raja-kumar" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="chip" href="https://scholar.google.com/citations?user=wlU2x_kAAAAJ&hl=en" target="_blank" rel="noreferrer">Google Scholar</a>
+        <a class="chip" href="https://www.linkedin.com/in/raja-kumar-58971010a/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="chip" href="https://github.com/raja-kumar/raja-kumar.github.io/tree/master/images/resume.pdf" target="_blank" rel="noreferrer">Resume (1 Page)</a>
+      </div>
 
-<!--- this is the project/publication/patent section -->
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-            <td style="padding:10px;width:100%;vertical-align:middle">
-              <heading>Projects/Papers</heading>
-            </td>
-          </tr>
-        </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+      <div style="margin-top:14px">
+        <span class="kicker">Research Interests: Vision-Language Models, Image and Video Understanding</span>
+      </div>
+    </aside>
 
-        
-          <tr bgcolor="#ffffd0">
-            <td style="padding:20px;width:35%;vertical-align:middle">
-                <img src='images/eccvw.png' width="250"></div>
-                    </td>
-            <td width="75%" valign="middle">
-                <p>
-                <a href="https://arxiv.org/abs/2410.11080">
-                    <papertitle>Paper: Few-shot Novel View Synthesis using Depth Aware 3D Gaussian Splatting</papertitle>
-                </a>
-                <br>
-                <strong>Raja Kumar</strong>,
-                <a href="https://www.vanshikavats.com/">Vanshika Vats</a>
-                <br>
-                <em>ECCV Workshops 2024</em>
-                <br>
-                </p>
-                <div class="paper" id="eccvw_2024">
-                    <a href="https://arxiv.org/abs/2410.11080">Pdf</a> /
-                  <a href="https://github.com/raja-kumar/depth-aware-3DGS">code</a> 
-                </div>
-                <br>
-            </td>
-        </tr>
-      </td>
-    </tr>
-
-
-          
-          <tr>
-            <td style="padding:20px;width:35%;vertical-align:middle">
-                <img src='images/iccvw_2023.png' width="250"></div>
-                    </td>
-            <td width="75%" valign="middle">
-                <p>
-                <a href="https://arxiv.org/abs/2308.13903">
-                    <papertitle>Paper: Disjoint Pose and Shape for 3D Face Reconstruction</papertitle>
-                </a>
-                <br>
-                <strong>Raja Kumar</strong>,
-                <a href="https://scholar.google.com/citations?user=2x71Xmh1U3gC&hl=en">Jiahao Luo</a>,
-                <a href="https://users.soe.ucsc.edu/~pang/">Alex Pang</a>,
-                <a href="https://users.soe.ucsc.edu/~davis/">James Davis</a>
-                <br>
-                <em>IEEE/CVF International Conference on Computer Vision (ICCV) Workshops</em>, 2023
-                <br>
-                </p>
-                <!---
-              <p>
-                  Existing methods for 3D face reconstruction from a few casually captured images employ deep learning based models along with a 3D Morphable Model(3DMM) as face geometry prior. Structure From Motion(SFM), followed by Multi-View Stereo (MVS), on the other hand, uses dozens of high-resolution images to reconstruct accurate 3D faces.However, it produces noisy and stretched-out results with only two views available. In this paper, taking inspiration from both these methods, we propose an end-to-end pipeline that disjointly solves for pose and shape to make the optimization stable and accurate. We use a face shape prior to estimate face pose and use stereo matching followed by a 3DMM to solve for the shape. The proposed method achieves end-to-end topological consistency, enables iterative face pose refinement procedure, and show remarkable improvement on both quantitative and qualitative results over existing state-of-the-art methods.
-                </p> 
-              --->
-                <div class="paper" id="iccvw_2023">
-                    <a href="https://arxiv.org/abs/2308.13903">ArXiv</a>
-                </div>
-                <br>
-            </td>
-        </tr>
-      </td>
-    </tr>
-
-    <tr bgcolor="#ffffd0">
-            <td style="padding:20px;width:35%;vertical-align:middle">
-                <img src='images/stereo_flame.png' width="250"></div>
-                    </td>
-            <td width="75%" valign="middle">
-                <p>
-                <a href="https://arxiv.org/abs/2308.13903">
-                    <papertitle>Paper: 3D Face Reconstruction: Is model-based classic passive stereo competitive?</papertitle>
-                </a>
-                <br>
-                <a href="https://scholar.google.com/citations?user=2x71Xmh1U3gC&hl=en">Jiahao Luo</a>,
-                <strong>Raja Kumar</strong>,
-                <a href="https://users.soe.ucsc.edu/~pang/">Alex Pang</a>,
-                <a href="https://users.soe.ucsc.edu/~davis/">James Davis</a>
-                <br>
-                <em>Under Review</em>
-                <br>
-                </p>
-              <!---  
-              <p>
-                  The highest quality 3D face reconstructions are produced using multi-view stereo methods, reporting errors below 0.5mm.
-Unfortunately, these methods typically employ dozens of high-resolution cameras in a large laboratory capture gantry. In contrast,
-state-of-the-art 3D face reconstructions using sophisticated deep learning models and few views are suited for casual mobile phone
-imaging outside the lab and report a mean error of 1-2mm. This paper investigates whether classic passive stereo methods can be used in scenarios with only a few low-resolution images
-available. We expect to find that it cannot since multi-view stereo performs well only when many high-resolution images are provided.
-When only two low-resolution images are available, stereo produces very noisy results which are not directly usable. However, our
-analysis shows that this visually noisy data has lower error than comparison state-of-the-art methods. We find that the visual artifacts
-from stereo can be removed using a morphable face model to constrain face shape
-                </p>
-              --->
-                <div class="paper" id="iccvw_2023">
-                    <a href="https://drive.google.com/file/d/1ys0M4PCsLzBcKT83dCV6kSsmua8nDaQz/view?usp=sharing">Pdf</a>
-                </div>
-                <br>
-            </td>
-        </tr>
-      </td>
-    </tr>
-          
-          <tr>
-        <td style="padding:20px;width:35%;vertical-align:middle">
-            <img src='images/dense_2d.png' width="250"></div>
-                </td>
-        <td width="75%" valign="middle">
-            <p>
-            <a href="">
-                <papertitle>Project: Dense 2D facial landmarks detector using 3D face model</papertitle>
-            </a>
-            <br>
-              <strong>Raja Kumar</strong>
-            <br>
-            </p>
-          <!---
-            <p>
-                Most of the existing face-alignment models detect the standard 68 face landmarks. However, there is a need of dense facial landmarks for tasks such 3d face reconstruction, face recognition etc. DAD-3DHeads proposed a dense 2d landmark detector based on 3D face reconstruction. However, their performance deteriorates when face is only a part of the image. To improve on this, I used mediapipe facial detector to detect the face, use the detected face to DADNet and then project back the detected landmarks in the original image coordinate. The Proposed pipeline is robust to all kind of input images.
-            </p>
-          --->
-            <div class="paper" id="btp">
-                <a href="https://github.com/raja-kumar/dense-face-alignment">code</a> 
-                
-            </div>
-            <br>
-        </td>
-    </tr>
-
-  <tr bgcolor="#ffffd0">
-        <td style="padding:20px;width:35%;vertical-align:middle">
-            <img src='images/pipeline.png' width="250"></div>
-                </td>
-        <td width="75%" valign="middle">
-            <p>
-            <a href="">
-                <papertitle>Project: Task Oriented Conversational Modelling With Subjective Knowledge</papertitle>
-            </a>
-            <br>
-              <strong>Raja Kumar</strong>
-            <br>
-            </p>
-          <!---
-            <p>
-                Existing conversational models are handled by a database(DB) and API based systems. However, very often users’ questions require information that cannot be
-handled by such systems. Nonetheless, answers to these questions are available
-in the form of customer reviews and FAQs. DSTC-11 proposes a three stage
-pipeline consisting of knowledge seeking turn detection, knowledge selection and
-response generation to create a conversational model grounded on this subjective
-knowledge. In this paper, we focus on improving the knowledge selection module
-to enhance the overall system performance. In particular, we propose entity retrieval
-methods which result in an accurate and faster knowledge search. Our proposed
-Named Entity Recognition (NER) based entity retrieval method results in 7X faster
-search compared to the baseline model. Additionally, we also explore a potential
-keyword extraction method which can improve the accuracy of knowledge selection.
-Preliminary results show a 4 % improvement in exact match score on knowledge
-selection task.
-            </p>
-          --->
-            <div class="paper" id="btp">
-                <a href="https://arxiv.org/abs/2303.17695">pdf</a> /
-                <a href="https://github.com/raja-kumar/knowledge-grounded-TODS">code</a> 
-                
-            </div>
-            <br>
-        </td>
-    </tr>
-
-        <tr>
-            <td style="padding:20px;width:35%;vertical-align:middle">
-                <img src='images/ijcnn_image.png' width="250"></div>
-                    </td>
-            <td width="75%" valign="middle">
-                <p>
-                <a href="https://ieeexplore.ieee.org/document/9533724">
-                    <papertitle>Paper: Hybrid and non-uniform quantization methods using retro synthesis data for efficient inference</papertitle>
-                </a>
-                <br>
-                <strong>Raja Kumar</strong>,
-                <a href="">Tejpratap GVSL</a>,
-                <a href="">Pradeep NS</a>,
-                <br>
-                <em>IJCNN</em>, 2021
-                <br>
-                </p>
-              <!---
-                <p>
-                    We proposes a data-independent post-training quantization scheme that eliminates the need for training data. This is achieved by generating a faux dataset referred to as ‘Retro- Synthesis Data'.
-                    We also introduced two futuristic variants of post- training quantization methods namely ‘Hybrid Quantization’ and ‘Non-Uniform Quantization’ for efficient and accurate inference.    
-                </p>
-              --->
-                <div class="paper" id="ijcnn_2021">
-                    <a href="data/Publication_IJCNN2021.pdf">pdf</a> /
-                    <a href="https://github.com/raja-kumar/Hybrid_and_Non-uniform_quantization">code</a> 
-                </div>
-                <br>
-            </td>
-        </tr>
-      </td>
-    </tr>
-
-    <tr bgcolor="#ffffd0">
-        <td style="padding:20px;width:35%;vertical-align:middle">
-            <img src='images/btp.png' width="250"></div>
-                </td>
-        <td width="75%" valign="middle">
-            <p>
-            <a href="">
-                <papertitle>Project: Automatic Classification and Localisation of Defects in Hot-Rolled Steel Surfaces</papertitle>
-            </a>
-            <br>
-              <strong>Raja Kumar</strong>
-            <br>
-            </p>
-          <!---
-            <p>
-               This is my Bachelor's thesis aimed at developing an efficient DL solution for real-time detection and segmentation of defects in hot-rolled steel Surfaces. We train an R-CNN model in the frequency domain
-using DCT to improve the accuracy achieving a mAP@0.5 score of 82.4.
-            </p>
-          --->
-            <!---
-          <div class="paper" id="btp">
-                <a href="https://docs.google.com/presentation/d/1i4injnLzix94WWDP8WRy1UJ23-JG9-p7/edit?usp=share_link&ouid=113131068153245641189&rtpof=true&sd=true">pdf</a> 
-                
-            </div>
-          --->
-            <br>
-        </td>
-    </tr>
-  </td>
-</tr>
-  </table>
-
-  <hr>
-
-<!--- this is the teaching section --->
-
- <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-                <td style="padding:10px;width:100%;vertical-align:middle">
-                    <heading>Teaching Assistant</heading>
-                </td>
-            </tr>
-        </tbody></table>
-<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-        <tr>
-            <ul>
-              <li><strong>Introduction to Artificial Intelligence,</strong> Prof. <a href="https://viterbi.usc.edu/directory/faculty/Rajati/Mohammad-Reza">Mohammad Reza Rajati</a>, USC, Fall 2024 </li>
-              <li><strong>Computer Systems and Assembly Programming,</strong> Prof. <a href="https://californiaconsultants.org/members/marcelo-siero/">Marcelo Siero</a>, UCSC, Winter, Fall 2023, Winter 2024</li>
-              <li><strong>Introduction to Analysis of Algorithms,</strong> Prof. <a href="https://users.soe.ucsc.edu/~lodha/">Suresh Lodha</a>, UCSC, Summer 2023</li>
-              <li><strong>Computer Architecture</strong> Prof. <a href="https://scottbeamer.net/">Scott Beamer</a>, UCSC,Spring 2023 </li>
-            </ul>
-        </tr>
-        </tbody></table>
-  <hr>
-
-
-  <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-    <tr>
-      <td style="padding:0px">
-        <br>
-        <p style="text-align:center;font-size:small;">
-          Design and source code from <a style="font-size:small;" href="https://jonbarron.info">Jon Barron's website</a>
+    <!-- Content -->
+    <section>
+      <div id="about" class="card section">
+        <h2>About</h2>
+        <p>
+          I am a CS PhD student at University of Southern California advised by Prof.
+          <a href="https://scholar.google.com/citations?user=wlU2x_kAAAAJ&hl=en target="_blank" rel="noreferrer">Ram Nevatia</a>.
+          I am broadly interested in Computer Vision and Deep Learning, with a focus on developing models for visual
+          understanding in images and videos.
         </p>
-      </td>
-    </tr>
-  </table>
-</td>
-</tr>
-</table>
+        <p>
+          Before Joining USC, I completed my MS in Computer Science at the University of California Santa Cruz advised by
+          Prof. <a href="https://users.soe.ucsc.edu/~davis/" target="_blank" rel="noreferrer">James Davis</a>. Previously,
+          at Samsung Research, I worked with the on-device-AI team on developing and deploying Deep Learning Models on
+          Samsung devices. I obtained my Bachelor's degree in Electrical Engineering from IIT Kharagpur.
+        </p>
+      </div>
 
-<script xml:space="preserve" language="JavaScript">
-hideallbibs();
-</script>
+      <!-- UPDATED: News shows 10 most recent at top; older items are scrollable -->
+      <div id="news" class="card section">
+        <h2>News / Updates</h2>
+      
+        <!-- One list: becomes scrollable only if it has > 10 items -->
+        <div class="news-list" id="news-wrap">
+          <ul class="list" id="news-list">
+            <li>[Nov 2025] Checkout <a href="https://arxiv.org/abs/2511.18305v1" target="_blank" rel="noreferrer">
+              DiVE-k </a> a visual reasoning framework that elicits differential reasoning</li>
+            <li>[Aug 2025] Attended Agentic AI Summit at UC Berkeley. Checkout my takeaways <a href="posts/Berkley_AI_summit.html" target="_blank" rel="noreferrer">blog</a>!</li>
+            <li>[Aug 2024] Joined USC as a CS PhD Student!</li>
+            <li>[Aug 2024] Few-shot 3D Gaussian splatting accepted at S3DSGR @ ECCV'24!</li>
+            <li>[Apr 2024] Joined Flawless AI as Applied Science Intern (3D vision)</li>
+            <li>[Mar 2024] Completed my MS in CS at UC Santa Cruz</li>
+            <li>[Oct 2023] Attended ICCV 2023 in paris to present our work</li>
+            <li>[Aug 2023] Paper on 3D face reconstruction accepted at ICCV Workshops 2023</li>
+            <li>[Sep 2022] Joined UCSC as CSE Master's student (Fall 2022)</li>
+            <li>[Mar 2022] Joined Silverlabs recommendation team as an ML Engineer</li>
+            <li>[Apr 2021] Paper on quantization accepted by IJCNN 2021</li>
+            <li>[Jun 2019] Joined Samsung Research on-device-AI team as an ML Engineer</li>
+            <!-- add more <li>...</li> items; scrolling will automatically kick in after 10 -->
+          </ul>
+        </div>
+      </div>
+      
 
-<!-- Google Analytics -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-131560165-1', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
+      <div id="projects" class="card section">
+        <h2>Projects / Papers</h2>
+      
+        <div class="grid">
+          <article class="pub">
+            <img class="thumb" src="https://raja-kumar.github.io/images/eccvw.png/divek.jpg" alt="DiVE-k figure" />
+            <div>
+              <h3>
+                <a href="https://arxiv.org/abs/2511.18305v1" target="_blank" rel="noreferrer">
+                  DiVE-k: differential visual reasoning for fine-grained image recognition
+                </a>
+              </h3>
+              <p class="meta">
+                <span class="me">Raja Kumar</span>, <a href="https://theshadow29.github.io/" target="_blank" rel="noreferrer">Arka Sadhu</a>, <a href="https://scholar.google.com/citations?user=wlU2x_kAAAAJ&hl=en target="_blank" rel="noreferrer">Ram Nevatia</a> <span class="conf-tag">Under review (2025)</span>
+              </p>
+              <div class="actions">
+                <a class="btn" href="https://arxiv.org/abs/2511.18305v1" target="_blank" rel="noreferrer">PDF</a>
+                <a class="btn" href="https://github.com/raja-kumar/DiVE-k" target="_blank" rel="noreferrer">Code</a>
+              </div>
+            </div>
+          </article>
 
+          <article class="pub">
+            <img class="thumb" src="https://raja-kumar.github.io/images/eccvw.png" alt="Project figure: ECCV workshops 2024" />
+            <div>
+              <h3>
+                <a href="https://arxiv.org/abs/2410.11080" target="_blank" rel="noreferrer">
+                  Few-shot Novel View Synthesis using Depth Aware 3D Gaussian Splatting
+                </a>
+              </h3>
+              <p class="meta">
+                <span class="me">Raja Kumar</span>, <a href="https://www.vanshikavats.com" target="_blank" rel="noreferrer">Vanshika Vats</a> <span class="conf-tag">ECCV Workshops 2024</span>
+              </p>
+              <div class="actions">
+                <a class="btn" href="https://arxiv.org/pdf/2410.11080.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a class="btn" href="https://github.com/raja-kumar/depth-aware-3DGS" target="_blank" rel="noreferrer">Code</a>
+              </div>
+            </div>
+          </article>
+      
+          <article class="pub">
+            <img class="thumb" src="https://raja-kumar.github.io/images/iccvw_2023.png" alt="Project figure: ICCV workshops 2023" />
+            <div>
+              <h3>
+                <a href="https://arxiv.org/abs/2308.13903" target="_blank" rel="noreferrer">
+                  Disjoint Pose and Shape for 3D Face Reconstruction
+                </a>
+              </h3>
+              <p class="meta">
+                <span class="me">Raja Kumar</span>,
+                <a href="https://scholar.google.com/citations?user=2x71Xmh1U3gC&hl=en" target="_blank" rel="noreferrer">Jiahao Luo</a>,
+                <a href="https://users.soe.ucsc.edu/~pang/" target="_blank" rel="noreferrer">Alex Pang</a>,
+                <a href="https://users.soe.ucsc.edu/~davis/" target="_blank" rel="noreferrer">James Davis</a>
+                <span class="conf-tag">ICCV Workshops 2023</span>
+              </p>
+              <div class="actions">
+                <a class="btn" href="https://arxiv.org/abs/2308.13903" target="_blank" rel="noreferrer">ArXiv</a>
+                <a class="btn" href="https://arxiv.org/pdf/2308.13903.pdf" target="_blank" rel="noreferrer">PDF</a>
+              </div>
+            </div>
+          </article>
+      
+          <article class="pub">
+            <img class="thumb" src="https://raja-kumar.github.io/images/stereo_flame.png" alt="Project figure: Stereo-FLAME" />
+            <div>
+              <h3>
+                <a href="https://drive.google.com/file/d/1DF9T32-R7-FulXuatLGV779MV-s7lR75/view" target="_blank" rel="noreferrer">
+                  3D Face Reconstruction: Is model-based classic passive stereo competitive?
+                </a>
+              </h3>
+              <p class="meta">
+                <a href="https://scholar.google.com/citations?user=2x71Xmh1U3gC&hl=en" target="_blank" rel="noreferrer">Jiahao Luo</a>,
+                <span class="me">Raja Kumar</span>,
+                <a href="https://users.soe.ucsc.edu/~pang/" target="_blank" rel="noreferrer">Alex Pang</a>,
+                <a href="https://users.soe.ucsc.edu/~davis/" target="_blank" rel="noreferrer">James Davis</a>
+              </p>
+              <div class="actions">
+                <a class="btn" href="https://drive.google.com/file/d/1DF9T32-R7-FulXuatLGV779MV-s7lR75/view" target="_blank" rel="noreferrer">PDF</a>
+              </div>
+            </div>
+          </article>
+      
+          <article class="pub">
+            <img class="thumb" src="https://raja-kumar.github.io/images/dense_2d.png" alt="Project figure: Dense 2D facial landmarks" />
+            <div>
+              <h3>Dense 2D facial landmarks detector using 3D face model</h3>
+              <p class="meta"><span class="me">Raja Kumar</span></p>
+              <div class="actions">
+                <a class="btn" href="https://github.com/raja-kumar/dense-face-alignment" target="_blank" rel="noreferrer">Code</a>
+              </div>
+            </div>
+          </article>
+      
+          <article class="pub">
+            <img class="thumb" src="https://raja-kumar.github.io/images/pipeline.png" alt="Project figure: Conversational modeling pipeline" />
+            <div>
+              <h3>Task Oriented Conversational Modelling With Subjective Knowledge</h3>
+              <p class="meta"><span class="me">Raja Kumar</span> <span class="conf-tag">ArXiv</span></p>
+              <div class="actions">
+                <a class="btn" href="https://arxiv.org/pdf/2303.17695.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a class="btn" href="https://github.com/raja-kumar/knowledge-grounded-TODS" target="_blank" rel="noreferrer">Code</a>
+              </div>
+            </div>
+          </article>
+      
+          <article class="pub">
+            <img class="thumb" src="https://raja-kumar.github.io/images/ijcnn_image.png" alt="Project figure: Quantization sensitivity plot" />
+            <div>
+              <h3>
+                <a href="https://raja-kumar.github.io/data/Publication_IJCNN2021.pdf" target="_blank" rel="noreferrer">
+                  Hybrid and non-uniform quantization methods using retro synthesis data for efficient inference
+                </a>
+              </h3>
+              <p class="meta"><span class="me">Raja Kumar</span>, Tejpratap GVSL, Pradeep NS <span class="conf-tag">IJCNN 2021</span></p>
+              <div class="actions">
+                <a class="btn" href="https://raja-kumar.github.io/data/Publication_IJCNN2021.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a class="btn" href="https://github.com/raja-kumar/Hybrid_and_Non-uniform_quantization" target="_blank" rel="noreferrer">Code</a>
+              </div>
+            </div>
+          </article>
+      
+          <!-- Optional:
+          <article class="pub">
+            <img class="thumb" src="https://raja-kumar.github.io/images/btp.png" alt="Project figure: Steel surface defects" />
+            <div>
+              <h3>Project: Automatic Classification and Localisation of Defects in Hot-Rolled Steel Surfaces</h3>
+              <p class="meta">Raja Kumar</p>
+            </div>
+          </article>
+          -->
+        </div>
+      </div>
+      
+
+      <div id="teaching" class="card section">
+        <h2>Teaching Assistant</h2>
+        <ul class="list">
+          <li> Advanced Computer Vision, Prof. <a href="https://scholar.google.com/citations?user=wlU2x_kAAAAJ&hl=en" target="_blank" rel="noreferrer">Ram Nevatia</a>, USC, Fall 2025</li>
+          <li>Introduction to Artificial Intelligence, Prof. <a href="https://viterbi.usc.edu/directory/faculty/Rajati/Mohammad-Reza" target="_blank" rel="noreferrer">Mohammad Reza Rajati</a>, USC, Fall 2024</li>
+          <li>Computer Systems and Assembly Programming, Prof. <a href="https://californiaconsultants.org/" target="_blank" rel="noreferrer">Marcelo Siero</a>, UCSC, Winter/Fall 2023, Winter 2024</li>
+          <li>Introduction to Analysis of Algorithms, Prof. <a href="https://users.soe.ucsc.edu/~lodha/" target="_blank" rel="noreferrer">Suresh Lodha</a>, UCSC, Summer 2023</li>
+          <li>Computer Architecture, Prof. <a href="https://scottbeamer.net/" target="_blank" rel="noreferrer">Scott Beamer</a>, UCSC, Spring 2023</li>
+        </ul>
+      </div>
+
+      <div id="contact" class="card section">
+        <h2>Contact</h2>
+        <p class="muted" style="margin:0">
+          Email works best (kumarraj at usc dot edu).
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© <span id="y"></span> Raja Kumar · Simple theme inspired by modern academic homepages.</div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById("theme-toggle");
+      const saved = localStorage.getItem("theme");
+      const defaultTheme = "light";
+
+      const applyTheme = (theme) => {
+        root.dataset.theme = theme;
+        if (btn) {
+          const isDark = theme === "dark";
+          btn.setAttribute("aria-pressed", String(isDark));
+          btn.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+        }
+      };
+
+      applyTheme(saved === "dark" ? "dark" : defaultTheme);
+
+      if (btn) {
+        btn.addEventListener("click", () => {
+          const next = root.dataset.theme === "dark" ? "light" : "dark";
+          applyTheme(next);
+          localStorage.setItem("theme", next);
+        });
+      }
+    })();
+  </script>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+  <script>
+    (function () {
+      const list = document.getElementById("news-list");
+      const wrap = document.getElementById("news-wrap");
+      if (!list || !wrap) return;
+  
+      const items = list.querySelectorAll("li");
+      if (items.length <= 10) return;
+  
+      // compute max height = height of first 10 items (so it scrolls beyond that)
+      let h = 0;
+      for (let i = 0; i < 10; i++) h += items[i].offsetHeight;
+  
+      // include the UL's vertical padding/margins if any
+      const cs = getComputedStyle(list);
+      const extra = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom)
+                  + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom);
+  
+      wrap.style.maxHeight = (h + extra) + "px";
+      wrap.classList.add("is-scroll");
+    })();
+  </script>
+  
 </body>
-
 </html>

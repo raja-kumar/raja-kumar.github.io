@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What’s Holding Back AI Agents? Key Takeaways from Agentic AI Summit by Berkley RDI</title>
+  <meta name="description" content="Key takeaways from an Agentic AI summit: why agents haven't taken off, the importance of UX, sample efficiency, safety, and the 'Grandma Test' for AGI." />
+  <style>
+    :root{
+      --bg:#ffffff;
+      --fg:#111827;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --card:#f9fafb;
+      --link:#2563eb;
+      --quote:#0f172a;
+    }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.7;
+    }
+    .container{
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 42px 20px;
+    }
+    header{
+      margin-bottom: 26px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    h1{
+      font-size: 2.05rem;
+      line-height: 1.2;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+    .meta{
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    article p{
+      margin: 14px 0;
+    }
+    h2{
+      margin: 28px 0 10px;
+      font-size: 1.35rem;
+      letter-spacing: -0.01em;
+    }
+    ul{
+      margin: 10px 0 16px 1.1rem;
+    }
+    li{ margin: 6px 0; }
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    blockquote{
+      margin: 16px 0;
+      padding: 14px 16px;
+      background: var(--card);
+      border-left: 4px solid var(--border);
+      color: var(--quote);
+      border-radius: 10px;
+    }
+    .callout{
+      margin-top: 22px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 1px 0 rgba(17,24,39,0.04);
+    }
+    .callout strong{
+      display:block;
+      margin-bottom: 6px;
+    }
+    footer{
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <header>
+      <h1>What’s Holding Back AI Agents? Key Takeaways from an Agentic AI Summit</h1>
+      <div class="meta">
+        <span>By Raja Kumar</span> . <span>Published: Aug 8, 2025</span>
+      </div>
+    </header>
+
+    <article>
+      <p>
+        I recently attended a summit focused on <strong>AI agents</strong>, featuring speakers from academia and
+        industry including Ion Stoica, Matei Zaharia, Dawn Song, and others. While the hype around agents is real,
+        the discussions were refreshingly honest about what’s <em>not</em> working yet—and what might unlock the next phase.
+      </p>
+
+      <h2>1) Why Agents Haven’t Taken Off (Yet)</h2>
+      <p>
+        One of the most useful frameworks discussed was a <strong>failure taxonomy for multi-agent systems</strong>.
+        The main bottlenecks are surprisingly practical:
+      </p>
+      <ul>
+        <li><strong>Limited connectors</strong>: agents still struggle to reliably pull information from the outside world.</li>
+        <li><strong>Poor generalization to new tools</strong>: teaching agents to use new tools remains brittle.</li>
+        <li><strong>High creation complexity</strong>: building agents is still hard enough that many workflows remain untouched.</li>
+        <li><strong>Cost</strong>: running agents at scale is still expensive.</li>
+      </ul>
+
+      <blockquote>
+        <p><strong>Ion Stoica:</strong> “Deep research is <em>great</em> at using search, <em>okay</em> at connectors, and <em>not good</em> at custom tools.”</p>
+      </blockquote>
+
+      <p>
+        This gap between reasoning and real-world action is one of the biggest friction points today.
+      </p>
+
+      <h2>2) Human Preference and User Design Matter More Than Ever</h2>
+      <p>
+        Human alignment isn’t just about safety—it’s about usability. Tools like
+        <a href="https://lmarena.ai/leaderboard" target="_blank" rel="noreferrer noopener">LLM Arena</a>
+        show how human preference evaluation is becoming central. A recurring theme was that
+        <strong>user design matters as much as model quality</strong>.
+      </p>
+      <p>
+        Agents can’t just be “ChatGPT with tools.” New interfaces are needed—ones that help users teach agents tasks
+        naturally, understand failures, and build trust over time.
+      </p>
+
+      <h2>3) Teaching Agents New Tasks Is Still Inefficient</h2>
+      <p>
+        Matei Zaharia highlighted a core research challenge: <strong>sample efficiency</strong>.
+      </p>
+      <ul>
+        <li>Reinforcement Learning can teach agents new tasks, but it’s inefficient at scale.</li>
+        <li>Tasks that require long reasoning can’t afford thousands of rollouts during training.</li>
+        <li>This makes large-scale agent training costly and slow.</li>
+      </ul>
+      <p>
+        Approaches like <a href="https://dspy.ai" target="_blank" rel="noreferrer noopener">DSPy</a> (and work such as GEPA)
+        aim to reduce this inefficiency by structuring how agents learn and reason, rather than brute-forcing with RL.
+      </p>
+
+      <h2>4) Safety, Security, and Long-Term Thinking</h2>
+      <p>
+        Dawn Song emphasized that <strong>agentic AI raises new safety and security challenges</strong>.
+        As agents become more autonomous, mistakes become more costly—reinforcing the need for agents that are
+        interpretable, constrained, and secure by default.
+      </p>
+      <p>
+        A related panel insight was the idea of <strong>long-term investment</strong>: agentic AI is not a 1–2 year bet;
+        it’s closer to a 10–15 year horizon.
+      </p>
+
+      <h2>5) A Simple but Powerful AGI Litmus Test</h2>
+      <p>
+        One of the most memorable ideas was the <strong>“Grandma Test for AGI”</strong>:
+      </p>
+      <blockquote>
+        <p>
+          If a grandma explains a task to a robot one time, and the robot does it correctly every time in the future
+          without mistakes, it passes. Otherwise, it fails.
+        </p>
+      </blockquote>
+      <p>
+        By this standard, today’s agents clearly fall short—but it’s a useful north star for generalization and reliability.
+      </p>
+
+      <h2>6) Scaling Isn’t Just for the Biggest Models</h2>
+      <p>
+        An encouraging note: improvements in large models are cascading down to <strong>medium-sized models</strong>.
+        Scaling benefits aren’t exclusive to frontier models, which could make capable agents more accessible over time.
+      </p>
+
+      <section class="callout">
+        <strong>Final Takeaway</strong>
+        <p style="margin:0;">
+          The agent problem is no longer just about better models. Progress depends on better tooling and connectors,
+          more efficient learning methods, thoughtful user interfaces, and strong safety foundations. Agents will take off
+          not when they reason better in isolation, but when they reliably act in the messy real world.
+        </p>
+      </section>
+
+      <footer>
+        <p style="margin:0;">
+          Notes: Talk references included Ion Stoica, Matei Zaharia, and Dawn Song. Mentioned topics also included
+          multi-agent failure taxonomy, preference evaluation, and agentic safety/security. Written using help from ChatGPT.
+        </p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
