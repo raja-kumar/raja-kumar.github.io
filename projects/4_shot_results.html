@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-Shot Generalization Benchmark</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f5fa;
+    --surface: #ffffff;
+    --surface2: #f0f0f8;
+    --border: #dcdce8;
+    --accent: #0077cc;
+    --accent2: #e85d20;
+    --gold: #d4a000;
+    --green: #00a86b;
+    --red: #d63031;
+    --text: #111118;
+    --muted: #6060a0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    padding: 40px 24px;
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(0,119,204,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(232,93,32,0.06) 0%, transparent 50%);
+  }
+
+  .header { text-align: center; margin-bottom: 48px; }
+  .header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .header p {
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-family: 'Space Mono', monospace;
+    color: var(--muted);
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    border-left: 2px solid var(--border);
+    padding-left: 10px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+
+  /* OVERVIEW CARDS */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .metric-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .metric-card.highlight { border-color: rgba(0,119,204,0.3); background: linear-gradient(135deg, #fff, #f0f4ff); }
+  .metric-card.highlight::before {
+    content: 'OURS';
+    position: absolute; top: 10px; right: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    background: rgba(0,119,204,0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .card-name { font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .card-category {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .metric-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .metric-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); }
+  .metric-value { font-weight: 700; font-size: 1rem; }
+  .metric-bar-wrap { height: 3px; background: var(--border); border-radius: 2px; margin-top: 4px; margin-bottom: 10px; overflow: hidden; }
+  .metric-bar { height: 100%; border-radius: 2px; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+  /* DATASET BREAKDOWN */
+  .datasets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .dataset-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .dataset-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dataset-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--muted);
+  }
+  .bar-chart { display: flex; flex-direction: column; gap: 6px; }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 44px;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+  }
+  .bar-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar-track { height: 18px; background: var(--surface2); border-radius: 4px; overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width 1.2s cubic-bezier(.4,0,.2,1); position: relative; }
+  .bar-score { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text); font-weight: 700; text-align: right; }
+  .bar-row.our-method .bar-name { color: var(--accent); font-weight: 700; }
+  .bar-row.our-method .bar-score { color: var(--accent); }
+
+  /* DELTA */
+  .delta-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 48px;
+  }
+  .delta-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+  .delta-subtitle { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); margin-bottom: 24px; }
+  .delta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .delta-cell {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .delta-dataset { font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
+  .delta-metric { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.7rem; }
+  .delta-metric-label { color: var(--muted); font-family: 'Space Mono', monospace; font-size: 0.6rem; }
+  .pos { color: var(--green); font-weight: 700; }
+  .neg { color: var(--red); font-weight: 700; }
+
+  .bar-fill, .metric-bar { width: 0; }
+
+  footer {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--border);
+    margin-top: 48px;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<div class="section-title">
+  <h1>4-Shot Setting<br>Generalization Benchmark</h1>
+  <p>Accuracy · Oxford Flowers · CUB · Oxford Pets · Stanford Cars · FGVC Aircraft</p>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#0077cc"></div>DiVE-k (Ours)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#9b8ec4"></div>Open Methods</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#00a86b"></div>Positive Δ</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#d63031"></div>Negative Δ</div>
+</div>
+
+<!-- OVERVIEW CARDS -->
+<div class="section-title">Average Accuracy — All Datasets</div>
+<div class="overview-grid" id="overviewGrid"></div>
+
+<!-- DATASET BREAKDOWN -->
+<div class="section-title">Accuracy by Dataset</div>
+<div class="datasets-grid" id="datasetsGrid"></div>
+
+<!-- DELTA -->
+<div class="delta-container">
+  <div class="delta-title">DiVE-k Improvements Over Baselines</div>
+  <div class="delta-subtitle">Δ Accuracy vs ViRFT and QWEN2.5-VL-7B across datasets</div>
+  <div class="delta-grid" id="deltaGrid"></div>
+</div>
+
+<footer>4-Shot Setting &nbsp;|&nbsp; * → Results using our inference pipeline &nbsp;|&nbsp; Consistency → Most consistent prediction in top-k</footer>
+
+<script>
+const methods = [
+  { name: 'ViRFT*',           cat: 'Open Method',  color: '#9b8ec4', score: 71.62 },
+  { name: 'QWEN2.5-VL-7B*',   cat: 'Open Method',  color: '#9b8ec4', score: 70.09 },
+  { name: 'DiVE-k',           cat: 'Ours',         color: '#0077cc', score: 74.75, ours: true },
+  { name: 'ViRFT* Consist.',  cat: 'Open Method',  color: '#9b8ec4', score: 67.80 },
+  { name: 'ViRFT',            cat: 'Open Method',  color: '#9b8ec4', score: 67.02 },
+  { name: 'QWEN2.5 Consist.', cat: 'Open Method',  color: '#9b8ec4', score: 67.07 },
+  { name: 'QWEN2.5-VL-7B',   cat: 'Open Method',  color: '#9b8ec4', score: 63.90 },
+  { name: 'DiVE-k Consist.',  cat: 'Ours',         color: '#0077cc', score: 71.07 },
+];
+
+// Sort descending
+methods.sort((a, b) => b.score - a.score);
+
+const og = document.getElementById('overviewGrid');
+const maxScore = Math.max(...methods.map(m => m.score));
+methods.forEach(m => {
+  const card = document.createElement('div');
+  card.className = 'metric-card' + (m.ours ? ' highlight' : '');
+  card.innerHTML = `
+    <div class="card-name">${m.name}</div>
+    <div class="card-category">${m.cat}</div>
+    <div class="metric-row">
+      <span class="metric-label">Avg Accuracy</span>
+      <span class="metric-value" style="color:${m.color}">${m.score.toFixed(2)}</span>
+    </div>
+    <div class="metric-bar-wrap">
+      <div class="metric-bar" data-w="${(m.score / maxScore * 100).toFixed(1)}" style="background:${m.color}"></div>
+    </div>
+  `;
+  og.appendChild(card);
+});
+
+// Dataset breakdown
+const datasets = [
+  { name: 'Oxford Flowers', icon: '🌸',
+    rows: [
+      { name: 'DiVE-k',          score: 88.72, color: '#0077cc', ours: true },
+      { name: 'QWEN2.5-VL-7B*',  score: 85.04, color: '#9b8ec4' },
+      { name: 'ViRFT*',          score: 84.80, color: '#9b8ec4' },
+      { name: 'ViRFT',           score: 81.12, color: '#9b8ec4' },
+      { name: 'QWEN2.5 Consist.',score: 81.86, color: '#9b8ec4' },
+      { name: 'ViRFT* Consist.', score: 83.33, color: '#9b8ec4' },
+      { name: 'QWEN2.5-VL-7B',   score: 78.43, color: '#9b8ec4' },
+      { name: 'DiVE-k Consist.', score: 85.78, color: '#0077cc' },
+    ]
+  },
+  { name: 'CUB', icon: '🐦',
+    rows: [
+      { name: 'DiVE-k',          score: 63.87, color: '#0077cc', ours: true },
+      { name: 'ViRFT*',          score: 60.00, color: '#9b8ec4' },
+      { name: 'QWEN2.5-VL-7B*',  score: 56.87, color: '#9b8ec4' },
+      { name: 'ViRFT* Consist.', score: 54.12, color: '#9b8ec4' },
+      { name: 'QWEN2.5 Consist.',score: 53.00, color: '#9b8ec4' },
+      { name: 'ViRFT',           score: 51.75, color: '#9b8ec4' },
+      { name: 'QWEN2.5-VL-7B',   score: 51.62, color: '#9b8ec4' },
+      { name: 'DiVE-k Consist.', score: 58.00, color: '#0077cc' },
+    ]
+  },
+  { name: 'Oxford Pets', icon: '🐾',
+    rows: [
+      { name: 'ViRFT* Consist.', score: 87.83, color: '#9b8ec4' },
+      { name: 'ViRFT*',          score: 83.10, color: '#9b8ec4' },
+      { name: 'DiVE-k Consist.', score: 86.48, color: '#0077cc' },
+      { name: 'DiVE-k',          score: 85.14, color: '#0077cc', ours: true },
+      { name: 'ViRFT',           score: 85.81, color: '#9b8ec4' },
+      { name: 'QWEN2.5 Consist.',score: 85.81, color: '#9b8ec4' },
+      { name: 'QWEN2.5-VL-7B*',  score: 80.40, color: '#9b8ec4' },
+      { name: 'QWEN2.5-VL-7B',   score: 79.05, color: '#9b8ec4' },
+    ]
+  },
+  { name: 'Stanford Cars', icon: '🚗',
+    rows: [
+      { name: 'DiVE-k',          score: 66.90, color: '#0077cc', ours: true },
+      { name: 'ViRFT*',          score: 64.75, color: '#9b8ec4' },
+      { name: 'QWEN2.5-VL-7B*',  score: 63.46, color: '#9b8ec4' },
+      { name: 'DiVE-k Consist.', score: 60.17, color: '#0077cc' },
+      { name: 'ViRFT* Consist.', score: 59.02, color: '#9b8ec4' },
+      { name: 'QWEN2.5 Consist.',score: 58.30, color: '#9b8ec4' },
+      { name: 'ViRFT',           score: 57.65, color: '#9b8ec4' },
+      { name: 'QWEN2.5-VL-7B',   score: 57.91, color: '#9b8ec4' },
+    ]
+  },
+  { name: 'FGVC Aircraft', icon: '✈️',
+    rows: [
+      { name: 'DiVE-k',          score: 69.10, color: '#0077cc', ours: true },
+      { name: 'ViRFT*',          score: 65.44, color: '#9b8ec4' },
+      { name: 'QWEN2.5-VL-7B*',  score: 64.67, color: '#9b8ec4' },
+      { name: 'DiVE-k Consist.', score: 64.92, color: '#0077cc' },
+      { name: 'ViRFT* Consist.', score: 54.71, color: '#9b8ec4' },
+      { name: 'QWEN2.5 Consist.',score: 56.36, color: '#9b8ec4' },
+      { name: 'ViRFT',           score: 58.75, color: '#9b8ec4' },
+      { name: 'QWEN2.5-VL-7B',   score: 52.50, color: '#9b8ec4' },
+    ]
+  },
+];
+
+const dg = document.getElementById('datasetsGrid');
+datasets.forEach(ds => {
+  // sort rows descending
+  ds.rows.sort((a, b) => b.score - a.score);
+  const maxVal = Math.max(...ds.rows.map(r => r.score));
+  const card = document.createElement('div');
+  card.className = 'dataset-card';
+  const rows = ds.rows.map(r => `
+    <div class="bar-row ${r.ours ? 'our-method' : ''}">
+      <div class="bar-name">${r.name}</div>
+      <div class="bar-track">
+        <div class="bar-fill" data-w="${(r.score / maxVal * 100).toFixed(1)}" style="background:${r.color}${r.ours ? '' : '88'}"></div>
+      </div>
+      <div class="bar-score">${r.score.toFixed(2)}</div>
+    </div>
+  `).join('');
+  card.innerHTML = `
+    <div class="dataset-title">${ds.icon} ${ds.name} <span class="dataset-badge">Accuracy</span></div>
+    <div class="bar-chart">${rows}</div>
+  `;
+  dg.appendChild(card);
+});
+
+// Delta grid
+const deltas = [
+  { dataset: 'Flowers',  vsViRFT: '+7.60',  vsQWEN: '+10.29' },
+  { dataset: 'CUB',      vsViRFT: '+12.12', vsQWEN: '+12.25' },
+  { dataset: 'Pets',     vsViRFT: '-0.67',  vsQWEN: '+6.09'  },
+  { dataset: 'Cars',     vsViRFT: '+9.25',  vsQWEN: '+8.99'  },
+  { dataset: 'Aircraft', vsViRFT: '+10.35', vsQWEN: '+16.60' },
+  { dataset: 'Average',  vsViRFT: '+7.73',  vsQWEN: '+10.85' },
+];
+
+const dGrid = document.getElementById('deltaGrid');
+deltas.forEach(d => {
+  const cell = document.createElement('div');
+  cell.className = 'delta-cell';
+  const fmt = v => `<span class="${v.startsWith('-') ? 'neg' : 'pos'}">${v}</span>`;
+  cell.innerHTML = `
+    <div class="delta-dataset">${d.dataset}</div>
+    <div style="font-family:'Space Mono',monospace;font-size:0.6rem;color:#aaa;margin-bottom:6px;text-align:left">vs ViRFT</div>
+    <div class="delta-metric"><span class="delta-metric-label">Δ</span>${fmt(d.vsViRFT)}</div>
+    <div style="font-family:'Space Mono',monospace;font-size:0.6rem;color:#aaa;margin:8px 0 4px;text-align:left">vs QWEN2.5</div>
+    <div class="delta-metric"><span class="delta-metric-label">Δ</span>${fmt(d.vsQWEN)}</div>
+  `;
+  dGrid.appendChild(cell);
+});
+
+// Animate bars
+requestAnimationFrame(() => {
+  setTimeout(() => {
+    document.querySelectorAll('[data-w]').forEach(el => {
+      el.style.width = el.dataset.w + '%';
+    });
+  }, 100);
+});
+</script>
+</body>
+</html>
