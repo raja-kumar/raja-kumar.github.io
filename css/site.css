@@ -1,0 +1,156 @@
+    :root{
+      --bg:#f7f8fb; --panel:#ffffff; --text:#111827; --muted:#6b7280;
+      --line:#e5e7eb; --link:#0369a1; --chip:#f3f4f6;
+      --max: 1120px;
+    }
+    :root[data-theme="dark"]{
+      --bg:#0b0d10; --panel:#0f1217; --text:#e9eef5; --muted:#aab6c5;
+      --line:#1f2631; --link:#7dd3fc; --chip:#141a22;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font:16px/1.55 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text)}
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Compact timeline with softly tinted entries and date badges. */
+    #news h2{display:flex;align-items:center;gap:8px}
+    .news-heading-icon{font-size:18px}
+    .news-list{margin-top:12px;padding:0 6px 0 0;scrollbar-color:var(--line) transparent}
+    .news-list.is-scroll{overflow:auto}
+    #news-list{position:relative;list-style:none;padding:0 0 0 20px;margin:0;display:grid;gap:6px}
+    #news-list::before{content:"";position:absolute;left:4px;top:16px;bottom:16px;width:1px;background:var(--line)}
+    #news-list li{--news-tone:#0284c7;position:relative;display:flex;align-items:baseline;gap:12px;margin:0;padding:7px 10px;border-radius:8px;background:color-mix(in oklab,var(--news-tone) 4%,var(--panel));font-size:14px;line-height:1.5}
+    #news-list li:nth-child(3n+2){--news-tone:#8b5cf6}
+    #news-list li:nth-child(3n){--news-tone:#0d9488}
+    #news-list li::before{content:"";position:absolute;left:-19px;top:16px;width:7px;height:7px;border-radius:50%;background:var(--news-tone);box-shadow:0 0 0 3px var(--panel)}
+    .news-date{flex:0 0 78px;padding:2px 6px;border-radius:5px;background:color-mix(in oklab,var(--news-tone) 12%,var(--panel));color:color-mix(in oklab,var(--news-tone) 75%,var(--text));font-size:11px;font-weight:700;text-align:center;white-space:nowrap}
+    .news-copy{min-width:0}
+    .news-badge{display:inline-block;margin-right:7px;padding:1px 6px;border-radius:999px;background:color-mix(in oklab,var(--news-tone) 10%,var(--panel));color:color-mix(in oklab,var(--news-tone) 65%,var(--text));font-size:10px;font-weight:600;line-height:1.5;vertical-align:1px;white-space:nowrap}
+    @media (max-width:480px){
+      #news-list li{gap:8px;padding:7px 8px}
+      .news-date{flex-basis:68px;padding:2px 4px;font-size:10px}
+    }
+
+    .topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:color-mix(in oklab, var(--bg) 78%, transparent);border-bottom:1px solid var(--line)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:20px 18px 14px;display:flex;flex-direction:column;align-items:center;gap:12px}
+    .top-actions{display:flex;align-items:center;justify-content:center;gap:10px;max-width:100%}
+    .brand{margin:0;font-size:clamp(36px,5vw,52px);line-height:1.15;font-weight:800;letter-spacing:-1px;text-align:center}
+    nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+    nav a{padding:8px 10px;border-radius:999px;background:transparent;border:1px solid transparent;color:var(--text);opacity:.9}
+    nav a:hover{text-decoration:none;border-color:var(--line);background:color-mix(in oklab, var(--chip) 70%, transparent)}
+    .theme-toggle{padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:color-mix(in oklab, var(--chip) 70%, transparent);color:var(--text);cursor:pointer;font-size:14px;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+    .theme-toggle svg{width:18px;height:18px;display:block}
+    .theme-toggle:hover{background:color-mix(in oklab, var(--chip) 50%, transparent)}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 18px 56px}
+    .intro{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start;margin-bottom:40px}
+    .intro .section{margin-bottom:0}
+
+    .profile-card{align-self:start}
+    .avatar{display:block;width:100%;height:auto;aspect-ratio:1;margin:0 auto;border-radius:18px;border:1px solid var(--line);object-fit:cover;background:var(--chip)}
+    .internship-callout{margin:20px 0 0;padding:16px 18px;border-left:4px solid var(--link);border-radius:12px;background:color-mix(in oklab, var(--link) 10%, var(--panel))}
+    [id]{scroll-margin-top:160px}
+    @media (max-width:760px){
+      .intro{grid-template-columns:1fr;gap:18px}
+      .profile-card{width:100%;max-width:420px;justify-self:center}
+      .topbar{position:relative}
+      .top-actions{align-items:flex-start}
+      .theme-toggle{flex-shrink:0}
+      [id]{scroll-margin-top:18px}
+    }
+
+    .quicklinks{margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:color-mix(in oklab, var(--chip) 85%, transparent);color:var(--text);font-size:14px;opacity:.95}
+    .chip:hover{text-decoration:none;opacity:1}
+    .quicklinks .chip{width:44px;height:44px;padding:10px;justify-content:center}
+    .quicklinks .chip svg{display:block;width:22px;height:22px}
+    .quicklinks .chip:hover{color:var(--link);border-color:var(--link)}
+    .quicklinks .chip:focus-visible{outline:2px solid var(--link);outline-offset:3px}
+    .last-updated{margin:14px 0 0;text-align:center;color:var(--muted);font-size:12px}
+
+    .section{padding:0;margin-bottom:36px}
+    .section + .section{padding-top:28px;border-top:1px solid var(--line)}
+    .section h2{margin:0 0 10px;font-size:22px;letter-spacing:.2px}
+    .service-heading{margin:20px 0 8px;font-size:16px;font-weight:600}
+    .muted{color:var(--muted)}
+    .list{margin:10px 0 0;padding-left:18px}
+    .list li{margin:6px 0}
+
+    /* NEW: scrollable news list */
+    .news-box{
+      margin-top:10px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background: color-mix(in oklab, var(--panel) 80%, var(--chip));
+      padding:10px 12px;
+    }
+    .news-scroll{
+      max-height: 240px;           /* adjust height as you like */
+      overflow:auto;
+      padding-right: 8px;          /* room for scrollbar */
+    }
+    .divider{
+      height:1px;
+      background:var(--line);
+      margin:10px 0;
+    }
+    .subhead{
+      margin:0 0 8px;
+      font-size:13px;
+      color:var(--muted);
+      letter-spacing:.2px;
+      text-transform:uppercase;
+    }
+
+    .section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .section-heading h2{margin:0}
+    .full-list-link{font-size:14px;font-weight:600;white-space:nowrap}
+    .page-title{font-size:28px;margin:0 0 8px}
+    .scholar-note{margin:0 0 22px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr;gap:0;margin-top:12px}
+    .pub{display:grid;grid-template-columns:160px minmax(0,1fr);gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+    .pub:last-child{border-bottom:0}
+    .pub:first-child{padding-top:8px}
+    @media (max-width:620px){.pub{grid-template-columns:1fr}}
+    .thumb{width:100%;height:110px;border-radius:14px;border:1px solid var(--line);object-fit:cover;background:var(--chip)}
+    .pub h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+    .meta{margin:0;color:var(--muted);font-size:14px}
+    .actions{margin-top:8px;display:flex;flex-wrap:wrap;gap:10px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--text);font-size:14px}
+    .btn:hover{text-decoration:none;background:color-mix(in oklab, var(--chip) 70%, transparent)}
+
+    footer{max-width:var(--max);margin:0 auto;padding:0 18px 26px;color:var(--muted);font-size:13px}
+    .visitor-map{width:100%;max-width:360px;margin:0 auto 28px;text-align:center}
+    .visitor-map img,.visitor-map iframe{max-width:100%}
+    .kicker{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:color-mix(in oklab, var(--chip) 85%, transparent);color:var(--muted);font-size:13px}
+    .conf {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    background: color-mix(in oklab, var(--link) 18%, transparent);
+    color: var(--link);
+    border: 1px solid color-mix(in oklab, var(--link) 35%, transparent);
+    vertical-align: middle;
+  }
+  .conf-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:4px 10px;
+    border-radius:999px;
+    background:color-mix(in oklab, var(--link) 16%, transparent);
+    color:var(--link);
+    border:1px solid color-mix(in oklab, var(--link) 30%, transparent);
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.15px;
+    line-height:1.2;
+  }
+  .meta .conf-tag{margin-left:6px}
+  .me{font-weight:800;color:var(--link)}
+
